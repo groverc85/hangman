@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <title>Hangman</title>
+    <meta name="description" content="">
+    <meta name="author" content="Jiongjian Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <base href="/">
+    <!--  angularCdn -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+    <!--   endAngularCdn -->
+
+    <!-- fileblock:js appScripts -->
+    <script src="javascripts/app.js"></script>
+    <script src="javascripts/hangmanController.js"></script>
+    <script src="javascripts/randomWordService.js"></script>
+    <script src="javascripts/hangmanDirective.js"></script>
+    <script src="javascripts/guessLetterService.js"></script>
+    <script src="javascripts/angular-local-storage.min.js"></script>
+    <!-- endfileblock -->
+
+    <!-- Include UI Bootstrap library -->
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- fileblock:css appStyles -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <!-- endfileblock -->
+</head>
+
+
+<body ng-controller="hangmanController" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8" style="min-height:550px">
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <h1>{{gameInfo}}</h1>   
+                        <h2>{{wordSpace}}</h2>
+                        <p>Current Level: {{form.level}}</p>
+                        <button class="btn btn-default" ng-click="setLevel('easy')">Easy</button>
+                        <button class="btn btn-default" ng-click="setLevel('medium')">Medium</button>
+                        <button class="btn btn-default" ng-click="setLevel('hard')">Hard</button>
+                        <button class="btn btn-default" ng-click="setLevel('random')">Wildcard</button>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12">  
+                        <div style="height:300px">
+                            <br>
+                            <hangman-image incorrect-count="{{wrongGuesses.length}}"></hangman-image>
+                        </div>
+                    </div>
+                </div>
+                <!--    form -->
+                <div class="row text-center">
+                    <div class="col-md-offset-3 col-md-6">
+                        <form class="form" ng-submit="submit()">
+                            <div class="form-group" ng-class="{'has-error': form.guessError}">
+                                <br>
+                                <div class="form-group" ng-if="showSubmit">
+                                    <div class="controls">                                    
+                                        <input type="text" autocomplete="off" maxlength="1" class="form-control" name="letter" ng-model="form.guess"> 
+                                    </div>
+                                    <br>
+                                    <button class="btn btn-default" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--   form end -->
+                <!-- form validation -->
+                <div class="row text-center">
+                    <div class="col-md-offset-3 col-md-6">
+                        <div ng-if="wrongGuesses.length!==0">
+                            <div>
+                                <p><h4>Incorrect Guess</h4></p>
+                            </div>
+                            <div ng-if="wrongGuesses.length==3">
+                                <p><h5>Stop hanging me.</h5></p>
+                            </div>
+                            <div ng-if="wrongGuesses.length==5">
+                                <p><h5>I'm half dying</h5></p>
+                            </div>
+                            <div ng-if="wrongGuesses.length==7">
+                                <p><h5>Only 30% HP left.</h5></p>
+                            </div>
+                            <div ng-if="wrongGuesses.length==9">
+                                <p><h5>Make your final struggle.</h5></p>
+                            </div>
+                            <div class="alert alert-danger">
+                                <p>{{wrongGuesses.join(', ')}}</p>
+                            </div>
+                        </div> 
+                         <div class="alert alert-danger" ng-if="form.guessError">
+                            <p>Please enter 1 letter.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- form validation end -->
+                <!-- reset game -->
+                <div class="row text-center">
+                    <div class="col-md-12">
+                         <form class="form-group" ng-if="showRestart">
+                            <p>Total Wins: {{form.wins}}</p>
+                            <p>Total Loses: {{form.loses}}</p>
+                            <button class="btn btn-default" ng-click="resetGame()">Play Again?</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- reset game end -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
