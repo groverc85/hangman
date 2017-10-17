@@ -22,7 +22,7 @@ The technical requirements are as follows:
 
 - Game must scale to millions of users (discussion)
 
-### How to Run
+### How to Run locally
 
 1. cd into current directory
 
@@ -33,6 +33,12 @@ The technical requirements are as follows:
 4. go to `localhost:3000`, if your 3000 port is occupied by other services, change `var port = normalizePort(process.env.PORT || '3000');` in `bin/www` to a port number of your choice
 
 5. start playing and accumulate your win/lose records.
+
+### How to Run online
+
+The whole application has been deployed to AWS, visit this link:
+
+[http://ec2-54-191-60-58.us-west-2.compute.amazonaws.com:3000/](http://ec2-54-191-60-58.us-west-2.compute.amazonaws.com:3000/)
 
 ### Implementations:
 
