@@ -1,4 +1,4 @@
-##The Hangman Game:
+## The Hangman Game:
 
 - When the game is started, the player is represented with an empty field for each letter in the word.
 
@@ -22,7 +22,7 @@ The technical requirements are as follows:
 
 - Game must scale to millions of users (discussion)
 
-###How to Run
+### How to Run
 
 1. cd into current directory
 
@@ -34,7 +34,7 @@ The technical requirements are as follows:
 
 5. start playing and accumulate your win/lose records.
 
-###Implementations:
+### Implementations:
 
 1. Use (M)EAN stack as basic framework, no MangoDB is used here tho, AngularJS for front end interaction with users, nodeJS handles all the game logic(generate word of different difficult levels, determine whether a specific guess is correct or not, return correct answer)
 
@@ -42,7 +42,7 @@ The technical requirements are as follows:
 
 3. Use a txt file containing 372,174 English words as library, use chunkBuffer to read the txt file(could be handy when the file size increase exponentially, e.g. hangman for pharses, proverb, etc.) difficulty of the word is determined by computing a score based on the lack of vowels in the word, the number of unique letters, and the commonness of each letter. The rule works great so far.
 
-###Improvements
+### Improvements
 
 1. Could write some test cases for both angular and node, as well as error handling.
 
