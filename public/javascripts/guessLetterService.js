@@ -22,5 +22,4 @@
             correctGuess: correctGuess
         };
     }]);
-
 })();

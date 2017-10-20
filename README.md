@@ -48,6 +48,12 @@ The whole application has been deployed to AWS, visit this link:
 
 3. Use a txt file containing 372,174 English words as library, use chunkBuffer to read the txt file(could be handy when the file size increase exponentially, e.g. hangman for pharses, proverb, etc.) difficulty of the word is determined by computing a score based on the lack of vowels in the word, the number of unique letters, and the commonness of each letter. The rule works great so far.
 
+### Testing:
+
+1. Use mocha and chai to test the core function of node part. `npm test`
+
+2. Use karma and jasmine to test angular part. `karma start`
+
 ### Improvements
 
 1. Could write some test cases for both angular and node, as well as error handling.

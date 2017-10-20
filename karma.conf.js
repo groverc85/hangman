@@ -17,12 +17,14 @@ module.exports = function(config) {
     files: [
       './node_modules/angular/angular.js',                             // angular
       './node_modules/angular-mocks/angular-mocks.js',                 // loads our modules for tests
+      './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
       './public/javascripts/app.js',                                   // our angular app
       './public/javascripts/hangmanController.js',                     // hangman controller
       './public/javascripts/guessLetterService.js',
       './public/javascripts/hangmanDirective.js',
       './public/javascripts/randomWordService.js',
-      './test/game.spec.js',
+      './public/javascripts/angular-local-storage.min.js',
+      './test/game.spec.js'
     ],
 
 
@@ -40,7 +42,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['spec'],
 
 
     // web server port

@@ -9,7 +9,7 @@
 	var offset = 0;
 	var chunkSize = 2048;
 	var chunkBuffer = new Buffer(chunkSize);
-	var fp = fs.openSync('routes/words.txt', 'r');
+	var fp = fs.openSync('routes/words_alpha.txt', 'r');
 	var bytesRead = 0;
 
 	var letters = ['e', 't', 'a', 'o', 'i', 'n', 's', 'h', 'r', 'd', 'l', 'c', 'u', 'm', 'w', 'f', 'g', 'y', 'p', 'b', 'v', 'k', 'j', 'x', 'q', 'z'];
@@ -43,7 +43,7 @@
 		return score;
 	};
 
-	while((bytesRead = fs.readSync(fp, chunkBuffer, 0, chunkSize, offset)) !== null) {
+	while(bytesRead = fs.readSync(fp, chunkBuffer, 0, chunkSize, offset)) {
 	    offset += bytesRead;
 	    var str = chunkBuffer.slice(0, bytesRead).toString();
 	    var arr = str.split('\n');
