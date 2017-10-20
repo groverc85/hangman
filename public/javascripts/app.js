@@ -4,7 +4,7 @@
 
 	app.config(function (localStorageServiceProvider) {
 	  localStorageServiceProvider
-	    .setPrefix('hangman')
+	    .setPrefix('hangman1.0')
 	    // .setStorageType('sessionStorage')
 	    .setNotify(true, true);
 	});
