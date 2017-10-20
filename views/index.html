@@ -20,9 +20,8 @@
     <script src="javascripts/guessLetterService.js"></script>
     <script src="javascripts/angular-local-storage.min.js"></script>
     <!-- endfileblock -->
-
     <!-- Include UI Bootstrap library -->
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- fileblock:css appStyles -->
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
@@ -33,16 +32,43 @@
 <body ng-controller="hangmanController" >
     <div class="container">
         <div class="row">
+            <div class="col-md-offset-8 col-md-8">
+                <button class="btn btn-default" ng-click="Confirm()">Rules</button>
+                <script type="text/ng-template" id="confirmAlert.html">
+                <div class="modal-body">
+                    <div class="innerWrap sub-modal">
+                        <h4>Hangman Game Rule</h4>
+                        <br>
+                        <ol>
+                            <li>You will try to guess what is this letter, original point is 100 pts</li>
+                            <br>
+                            <li>If you guess a letter correctly, each field that represents that letter is filled with the letter.</li>
+                            <br>
+                            <li>If you guesses a letter incorrectly, a piece of a gallow with a hanging man is drawn, and it will cost you 10 points.</li>
+                            <br>
+                            <li>After 10 incorrect guesses, the game is over and you are lost.</li>
+                            <br>
+                        </ol>
+                        <form class="form-horizontal">
+                            <div class="row text-center">
+                                <button class="btn grn-btn m-t-0" type="" ng-click="ok()">Got it</button>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+                </script>
+            </div>
             <div class="col-md-offset-2 col-md-8" style="min-height:550px">
                 <div class="row text-center">
                     <div class="col-md-12">
                         <h1>{{gameInfo}}</h1>   
                         <h2>{{wordSpace}}</h2>
                         <p>Current Level: {{form.level}}</p>
-                        <button class="btn btn-default" ng-click="setLevel('easy')">Easy</button>
-                        <button class="btn btn-default" ng-click="setLevel('medium')">Medium</button>
-                        <button class="btn btn-default" ng-click="setLevel('hard')">Hard</button>
-                        <button class="btn btn-default" ng-click="setLevel('random')">Wildcard</button>
+                        <p>Points: {{form.points}}</p>
+                        <button class="btn btn-default" ng-model="radioModel" ng-click="setLevel('easy')" uib-btn-radio="'easy'">Easy(200pts)</button>
+                        <button class="btn btn-default" ng-model="radioModel" ng-click="setLevel('medium')" uib-btn-radio="'medium'">Medium(300pts)</button>
+                        <button class="btn btn-default" ng-model="radioModel" ng-click="setLevel('hard')" uib-btn-radio="'hard'">Hard(400pts)</button>
+                        <button class="btn btn-default" ng-model="radioModel" ng-click="setLevel('random')" uib-btn-radio="'random'">Wildcard(300pts)</button>
                     </div>
                 </div>
                 <div class="row text-center">
@@ -56,15 +82,16 @@
                 <!--    form -->
                 <div class="row text-center">
                     <div class="col-md-offset-3 col-md-6">
-                        <form class="form" ng-submit="submit()">
+                        <form class="form" name="input" ng-submit="submit()">
                             <div class="form-group" ng-class="{'has-error': form.guessError}">
                                 <br>
                                 <div class="form-group" ng-if="showSubmit">
-                                    <div class="controls">                                    
-                                        <input type="text" autocomplete="off" maxlength="1" class="form-control" name="letter" ng-model="form.guess"> 
+                                    <div class="controls">
+                                        <input type="text" autocomplete="off" maxlength="1" class="form-control" name="letter" ng-pattern="/^[a-zA-Z]*$/" ng-trim="false" ng-model="form.guess" autofocus> 
                                     </div>
                                     <br>
-                                    <button class="btn btn-default" type="submit">Submit</button>
+                                    <span ng-show="input.letter.$error.pattern">Invalid Input</span>
+                                    <button ng-show="!input.letter.$error.pattern" class="btn btn-default" type="submit">Submit</button>
                                 </div>
                             </div>
                         </form>

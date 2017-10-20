@@ -1,8 +1,13 @@
-var express = require('express');
-var router = express.Router();
+/* jshint node: true */
+(function(){
+    "use strict";
 
-router.get('/', function(req, res, next) {
-  res.render('index.html');
-});
+    var express = require('express');
+	var router = express.Router();
 
-module.exports = router;
+	router.get('/', function(req, res) {
+	  res.render('index.html');
+	});
+
+	module.exports = router;
+})();
